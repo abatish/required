@@ -35,7 +35,7 @@ module Kernel
     ruby_files = ruby_files.select { |f| f =~ opt[:include] } if opt[:include]
     ruby_files = ruby_files.reject { |f| f =~ opt[:exclude] } if opt[:exclude]
     opt[:sort] ? ruby_files.sort!(&opt[:sort]) : ruby_files.sort!
-    ruby_files.each { |file| loaded_files << file if require file }
+    ruby_files.each { |file| loaded_files << file if require File.expand_path(file) }
     loaded_files
   end
 
