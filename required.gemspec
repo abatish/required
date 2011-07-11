@@ -26,12 +26,12 @@ Quick example:
 
 See the README for more examples, and description of options.
 DESCRIPTION
-  s.files = FileList["lib/**/*"].to_a
+  s.files = Dir["lib/**/*"]
   s.require_path = "lib"
   # s.autorequire = "name"
-  s.test_files = FileList["tests/*test.rb"].to_a
+  s.test_files = Dir["tests/*test.rb"]
   s.has_rdoc = true
-  s.extra_rdoc_files = ["README"]
+  s.extra_rdoc_files = ["README.markdown"]
   # s.add_dependency("dependency", ">= 0.x.x")
 end
 
