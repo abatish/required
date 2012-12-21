@@ -15,10 +15,10 @@ module Kernel
     validate_options(options)
     loaded_files = []
     directories.each do |directory|
-      next unless File.directory? directory
+      break unless File.directory? directory
       loaded_files << require_within(directory, options)
 
-      next unless options[:recurse]
+      break unless options[:recurse]
       sub_dirs = Dir["#{directory}/*"].select { |d| File.directory? d }
       options[:sort] ? sub_dirs.sort!(&options[:sort]) : sub_dirs.sort!
       # TODO AS: Reject sub_dir for includes and excludes
@@ -29,7 +29,7 @@ module Kernel
 
   private
   def require_within(directory, opt)
-    next unless File.directory? directory
+    break unless File.directory? directory
     loaded_files = []
     ruby_files = Dir["#{directory}/*.rb"].reject{ |f| File.directory? f }
     ruby_files = ruby_files.select { |f| f =~ opt[:include] } if opt[:include]
